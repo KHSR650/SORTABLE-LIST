@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <el-button @click="goToQuestionSearch"></el-button>
     <h1>list</h1>
     <transition-group tag="ul" name="flip-list">
       <li class="card" v-for="(item,index) in getTodoList" :key="JSON.stringify(item)">
@@ -44,6 +45,9 @@ export default {
         updatedList[index] = temp;
         this.$store.commit("todo/setTodoList", updatedList);
       }
+    },
+    goToQuestionSearch(){
+      this.$router.push('/questions')
     }
   }
 };
