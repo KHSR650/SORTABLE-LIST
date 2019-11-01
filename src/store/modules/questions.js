@@ -1,8 +1,8 @@
 
 import axios from "axios"
 
-// const APIURL = 'https://tokenize-questions.herokuapp.com'
-const APIURL = 'http://localhost:3000'
+const APIURL = 'https://tokenize-questions.herokuapp.com'
+// const APIURL = 'http://localhost:3000'
 
 const initateState = () =>{
     return {
