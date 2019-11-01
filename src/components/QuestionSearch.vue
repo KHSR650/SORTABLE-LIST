@@ -60,9 +60,6 @@ export default {
         { value: "babel", link: "https://github.com/babel/babel" }
       ];
     },
-    handleSelect(item) {
-      console.log(item);
-    },
     async getQuestionsForSuggestions() {
       let params = {
         question: this.question
