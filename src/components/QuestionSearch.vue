@@ -2,19 +2,24 @@
 <template>
   <div>
     <h1>Question Search</h1>
-    {{matchedQuestions}}
+    
     <el-row class="demo-autocomplete">
       <el-col :span="24">
         <div class="sub-title">list suggestions when activated</div>
-        <el-autocomplete
+        <el-input
           class="inputtype"
           v-model="question"
-          :fetch-suggestions="querySearch"
+          @keyup.native="querySearch()"
           placeholder="Please Input"
-          @select="handleSelect"
           size="medium"
-        ></el-autocomplete>
+        ></el-input>
       </el-col>
+    </el-row>
+    <el-row v-if="matchedQuestions.length">
+      <ul>
+        <li class="qustion" v-for="(question,index) in matchedQuestions" :key="index">
+          {{question}}</li>
+      </ul>
     </el-row>
   </div>
 </template>
@@ -34,26 +39,16 @@ export default {
     ...mapGetters("questions", ["getSearchedQuestions"])
   },
   methods: {
-    querySearch(queryString, cb) {
-      if (queryString.split(" ").length > 2) {
+    querySearch() {
+      if (this.question.split(" ").length > 2) {
         this.getQuestionsForSuggestions();
-
-        cb(this.matchedQuestions);
       } else {
         this.matchedQuestions = [
-          "What does good customer service mean to you?",
-          "Describe the property you are looking to buy. How big is it? How many bedrooms? Bathrooms? Near a school? Transportation? Quiet? Busy? Lots of trees? Water? I want to get a good picture of what success looks like."
+          
         ];
-        cb([]);
       }
     },
-    createFilter(queryString) {
-      return link => {
-        return (
-          link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-        );
-      };
-    },
+    
     loadAll() {
       return [
         { value: "vue", link: "https://github.com/vuejs/vue" },
@@ -93,5 +88,17 @@ export default {
 .inputtype {
   height: 71px !important;
   width: 600px !important;
+}
+.qustion{
+    padding: 20px;
+    display: block;
+    border: 1px solid;
+    background: #eef5f7;
+    overflow: auto;
+    margin: 0;
+    width: fit-content;
+    text-align: center;
+    margin-bottom: 24px;
+
 }
 </style>

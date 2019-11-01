@@ -1,6 +1,8 @@
 
 import axios from "axios"
 
+const APIURL = 'https://tokenize-questions.herokuapp.com'
+
 const initateState = () =>{
     return {
         searched_questions:[]
@@ -23,7 +25,7 @@ const actions = {
             context.commit('questions/setSearchedQuestions',[],{
                 root:true
             })
-            let response = await axios.get('http://localhost:3000/questions/search',{
+            let response = await axios.get(APIURL + '/questions/search',{
                 params:params
             })
             context.commit('questions/setSearchedQuestions',response.data.questions,{
